@@ -10,6 +10,6 @@ Each student belongs to a single session, whereas instructors can teach multiple
 Instructors can create evaluations directly on the platform, including various types (multiple choice, practical work, etc.). Instructors are also able to assign grades to students for these evaluations.
 
 ### Tasks to Accomplish
-. Create an Entity-Relationship Diagram (MCD) representing all project data.
-. Provide a Logical Data Model (MLD) in text format listing all tables and their relationships.
-. Develop an SQL script to set up this database.
+- Create an Entity-Relationship Diagram (MCD) representing all project data.
+- Provide a Logical Data Model (MLD) in text format listing all tables and their relationships.
+- Develop an SQL script to set up this database.
