@@ -1,0 +1,21 @@
+## MLD
+
+User (id_user, username, email, password, user_type, img)
+
+Teacher (id_teacher, id_user)
+
+Student (id_student, id_session, id_user)
+
+Teacher_Session (id_teacher, id_session)
+
+Session (id_session, name, start_date, end_date)
+
+Course (id_course, name, start_date, end_date, content, id_session)
+
+Session_Evaluation (id_session, id_evaluation)
+
+Evaluation (id_evaluation, id_evaluationtype)
+
+Grade (id_grade, score, id_evaluation, id_student)
+
+EvaluationType (id_evaluationtype, name)

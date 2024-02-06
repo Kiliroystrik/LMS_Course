@@ -1,0 +1,87 @@
+CREATE TABLE _User(
+   id_user INT,
+   username VARCHAR(255) NOT NULL,
+   email VARCHAR(255) NOT NULL,
+   password VARCHAR(255) NOT NULL,
+   user_type VARCHAR(50) NOT NULL,
+   img VARCHAR(255),
+   PRIMARY KEY(id_user)
+) ENGINE=InnoDB;
+
+CREATE TABLE Teacher(
+   id_teacher INT,
+   id_user INT NOT NULL,
+   PRIMARY KEY(id_teacher),
+   UNIQUE(id_user),
+   FOREIGN KEY(id_user) REFERENCES _User(id_user)
+) ENGINE=InnoDB;
+
+CREATE TABLE Session(
+   id_session VARCHAR(50),
+   name VARCHAR(255) NOT NULL,
+   start_date DATE NOT NULL,
+   end_date DATE NOT NULL,
+   PRIMARY KEY(id_session),
+   UNIQUE(name)
+) ENGINE=InnoDB;
+
+CREATE TABLE Course(
+   id_course INT,
+   name VARCHAR(255) NOT NULL,
+   start_date DATE NOT NULL,
+   end_date DATE NOT NULL,
+   content TEXT,
+   id_session VARCHAR(50) NOT NULL,
+   PRIMARY KEY(id_course),
+   FOREIGN KEY(id_session) REFERENCES Session(id_session)
+) ENGINE=InnoDB;
+
+CREATE TABLE EvaluationType(
+   id_evaluationtype INT,
+   name VARCHAR(50) NOT NULL,
+   PRIMARY KEY(id_evaluationtype),
+   UNIQUE(name)
+) ENGINE=InnoDB;
+
+CREATE TABLE Student(
+   id_student INT,
+   id_session VARCHAR(50),
+   id_user INT NOT NULL,
+   PRIMARY KEY(id_student),
+   UNIQUE(id_user),
+   FOREIGN KEY(id_session) REFERENCES Session(id_session),
+   FOREIGN KEY(id_user) REFERENCES _User(id_user)
+) ENGINE=InnoDB;
+
+CREATE TABLE Evaluation(
+   id_evaluation INT,
+   id_evaluationtype INT NOT NULL,
+   PRIMARY KEY(id_evaluation),
+   FOREIGN KEY(id_evaluationtype) REFERENCES EvaluationType(id_evaluationtype)
+) ENGINE=InnoDB;
+
+CREATE TABLE Grade(
+   id_grade INT,
+   score DECIMAL(5,2) NOT NULL,
+   id_evaluation INT NOT NULL,
+   id_student INT NOT NULL,
+   PRIMARY KEY(id_grade),
+   FOREIGN KEY(id_evaluation) REFERENCES Evaluation(id_evaluation),
+   FOREIGN KEY(id_student) REFERENCES Student(id_student)
+) ENGINE=InnoDB;
+
+CREATE TABLE Session_Evaluation(
+   id_session VARCHAR(50),
+   id_evaluation INT,
+   PRIMARY KEY(id_session, id_evaluation),
+   FOREIGN KEY(id_session) REFERENCES Session(id_session),
+   FOREIGN KEY(id_evaluation) REFERENCES Evaluation(id_evaluation)
+) ENGINE=InnoDB;
+
+CREATE TABLE Teacher_Session(
+   id_teacher INT,
+   id_session VARCHAR(50),
+   PRIMARY KEY(id_teacher, id_session),
+   FOREIGN KEY(id_teacher) REFERENCES Teacher(id_teacher),
+   FOREIGN KEY(id_session) REFERENCES Session(id_session)
+) ENGINE=InnoDB;
